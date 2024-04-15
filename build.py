@@ -28,13 +28,14 @@ def build(setup_kwargs):
         Extension(
             "potrace._potrace",
             sources=["potrace/_potrace.pyx"],
-            include_dirs=[np.get_include()],
+            include_dirs=[np.get_include(), '/opt/homebrew/opt/potrace/include/'],
+            library_dirs=['/opt/homebrew/opt/potrace/lib/'],
             libraries=["potrace"],
         ),
         Extension(
             "potrace.bezier",
             sources=["potrace/bezier.pyx"],
-            include_dirs=[np.get_include()],
+            include_dirs=[np.get_include(), '/opt/homebrew/opt/libagg/include/'],
             language="c++",
             extra_compile_args=extra_compile_args,
             extra_link_args=extra_link_args,
@@ -42,6 +43,7 @@ def build(setup_kwargs):
         Extension(
             "potrace.agg.curves",
             sources=["potrace/agg/curves.pyx"],
+            include_dirs=[np.get_include(), '/opt/homebrew/opt/libagg/include/'],
             language="c++",
             extra_compile_args=extra_compile_args,
             extra_link_args=extra_link_args,
